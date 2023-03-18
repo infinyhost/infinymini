@@ -1,0 +1,23 @@
+{
+    "name": "infinyhost/infinymini",
+    "description": "Minimal PHP framework",
+    "autoload": {
+        "psr-4": {
+            "InfinyHost\\InfinyMini\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "InfinyHost LLC",
+            "email": "hi@infinyhost.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "vlucas/phpdotenv": "^5.5",
+        "psr/log": "^3.0",
+        "psr/container": "^2.0.2",
+        "twig/twig": "^3.0",
+        "laminas/laminas-diactoros": "^2.6"
+    }
+}
