@@ -39,6 +39,7 @@ class App
     private static ?App $instance = null;
 
     private function __construct(){
+        ob_start();
         // Init service container
         $this->container = new ServiceContainer();
         // Determine if the current run is a CLI one

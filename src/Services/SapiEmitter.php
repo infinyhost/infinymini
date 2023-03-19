@@ -32,6 +32,7 @@ class SapiEmitter implements EmitterInterface
      */
     private function emitBody(ResponseInterface $response): void
     {
+        ob_end_flush();
         $app = App::getInstance();
         $cpanel = $app->services()->get('cpanel');
         if (isset($response->cpanelHeader)) {
