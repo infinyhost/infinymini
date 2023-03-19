@@ -191,11 +191,11 @@ class App
                $route = $_GET['route'];
                $method = $request->getMethod();
             }
-            else if(isset($_POST['route']) && !empty($_POST['route'])) {
+            if(isset($_POST['route']) && !empty($_POST['route'])) {
                 $route = $_POST['route'];
                 $method = $request->getMethod();
             }
-            else if($this->isCli && isset($_SERVER['argv'][1]) && !empty($_SERVER['argv'][1])) {
+            if($this->isCli && isset($_SERVER['argv'][1]) && !empty($_SERVER['argv'][1])) {
                 $route = $_SERVER['argv'][1];
                 $method = "CLI";
             }
