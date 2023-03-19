@@ -90,6 +90,12 @@ class App
             ]);
         });
 
+        // CPanel API
+        $this->container->add('cpanel', function(){
+            require_once(__DIR__ . '/Services/CPanel/CPANEL.php');
+            return new \CPanel();
+        });
+
         // Router
         $this->container->add('router', function(){
             $router = new Router();
@@ -186,6 +192,7 @@ class App
 
         // Emit the response
         $emitter = new \Laminas\HttpHandlerRunner\Emitter\SapiEmitter();
+        $cpanel = $this->container->get('cpanel');
         $emitter->emit($response);
     }
 
