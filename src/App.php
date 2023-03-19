@@ -230,6 +230,21 @@ class App
         return $this->container->get('request');
     }
 
+    public function redirect(array $query): ResponseInterface
+    {
+        $url = $this->request()->getUri()->getPath();
+        if (count($query) > 0) {
+            $url .= '?';
+            foreach ($query as $key => $value) {
+                $url .= urlencode($key) . '=' . urlencode($value) . '&';
+            }
+            $url = rtrim($url, '&');
+        }
+        $response = $this->response()->withStatus(302);
+        $response = $response->withHeader('Location', $url);
+        return $response;
+    }
+
     /**
      * Get the app instance
      * @return App
