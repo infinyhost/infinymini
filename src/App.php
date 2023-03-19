@@ -7,6 +7,7 @@ use InfinyHost\InfinyMini\Exceptions\ServiceNotFoundException;
 use InfinyHost\InfinyMini\Services\Config;
 use InfinyHost\InfinyMini\Services\Logger;
 use InfinyHost\InfinyMini\Services\Router\Router;
+use InfinyHost\InfinyMini\Services\SapiEmitter;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -149,6 +150,10 @@ class App
         $body = $twig->render($view, $data);
         $response = $this->response()->withStatus(200);
         $response->getBody()->write($body);
+        // Add Cpanel header if available
+        if (isset($data['cpanelHeader'])) {
+            $response->cpanelHeader = $data['cpanelHeader'];
+        }
         return $response;
     }
 
@@ -191,8 +196,7 @@ class App
         }
 
         // Emit the response
-        $emitter = new \Laminas\HttpHandlerRunner\Emitter\SapiEmitter();
-        $cpanel = $this->container->get('cpanel');
+        $emitter = new SapiEmitter();
         $emitter->emit($response);
     }
 
