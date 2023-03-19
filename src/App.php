@@ -107,6 +107,20 @@ class App
             }
             return $router;
         });
+
+        // User-defined services
+        if (is_dir(APPPATH . 'Services')) {
+            $services = scandir(APPPATH . 'Services');
+            foreach ($services as $service) {
+                if (is_file(APPPATH . 'Services' . DIRECTORY_SEPARATOR . $service)) {
+                    $service = "App\\Services\\".str_replace('.php', '', $service);
+                    $instance = new $service($this);
+                    if ($instance instanceof ServiceProvider) {
+                        $instance->register();
+                    }
+                }
+            }
+        }
     }
 
     /**
