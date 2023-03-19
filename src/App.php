@@ -88,7 +88,7 @@ class App
         // Template engine
         $this->container->add('twig', function() use(&$cfg){
             return new Environment(new FilesystemLoader($cfg->get('app.views')), [
-                'cache' => $this->config()->get('debug') ? null : new \Twig\Cache\FilesystemCache($cfg->get('app.viewsCache'), \Twig\Cache\FilesystemCache::FORCE_BYTECODE_INVALIDATION),
+                'cache' => $cfg->get('app.debug', true) ? false : new \Twig\Cache\FilesystemCache($cfg->get('app.viewsCache'), \Twig\Cache\FilesystemCache::FORCE_BYTECODE_INVALIDATION),
             ]);
         });
 
