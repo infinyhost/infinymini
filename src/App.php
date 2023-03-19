@@ -184,15 +184,9 @@ class App
             return;
         }
 
-        // Send the response as HTTP response with code and content type
-        http_response_code($response->getStatusCode());
-        if ($response->hasHeader('Content-Type')){
-            header('Content-Type: ' . $response->getHeader('Content-Type')[0]);
-        } else {
-            header('Content-Type: text/html');
-        }
-
-        echo $response->getBody();
+        // Emit the response
+        $emitter = new \Laminas\HttpHandlerRunner\Emitter\SapiEmitter();
+        $emitter->emit($response);
     }
 
     public function response(): ResponseInterface

@@ -13,11 +13,11 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
         "vlucas/phpdotenv": "^5.5",
         "psr/log": "^3.0",
         "psr/container": "^2.0.2",
         "twig/twig": "^3.0",
-        "laminas/laminas-diactoros": "^2.6"
+        "laminas/laminas-diactoros": "^2.15.0",
+        "laminas/laminas-httphandlerrunner": "^2.2.0"
     }
 }
